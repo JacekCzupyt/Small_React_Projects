@@ -1,4 +1,5 @@
 import React from 'react';
+import CarListItem from './CarListItemComponent';
 
 class CarsListComponent extends React.Component{
     constructor(props){
@@ -11,7 +12,7 @@ class CarsListComponent extends React.Component{
     render(){
         return(
             <div>
-                {this.state.PlaceholderState}
+                <CarListItem carName="example" seats="seatExample" doors="doorExample" pricePerDay={100}/>
             </div>
         )
     }
