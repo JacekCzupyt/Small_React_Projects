@@ -1,14 +1,38 @@
 [
     {
-        "name" : "Toyota Aygo",
-        "price" : 60000
+      "name": "Toyota Yaris",
+      "pricePerDay": 500,
+      "seats": 5,
+      "doors": 4
     },
     {
-        "name" : "Toyota Corolla",
-        "price": 100000
+      "name": "Toyota Aygo",
+      "pricePerDay": 300,
+      "seats": 3,
+      "doors": 2
     },
     {
-        "name" : "Volkswagen Polo",
-        "price" : 80000
+      "name": "Buick Skylark",
+      "pricePerDay": 1500,
+      "seats": 2,
+      "doors": 2
+    },
+    {
+      "name": "Ford galaxy",
+      "pricePerDay": 870,
+      "seats": 7,
+      "doors": 5
+    },
+    {
+      "name": "Pontiac Catalina",
+      "pricePerDay": 120,
+      "seats": 5,
+      "doors": 4
+    },
+    {
+      "name": "Ford Transit",
+      "pricePerDay": 2300,
+      "seats": 2,
+      "doors": 3
     }
-]
+  ]
