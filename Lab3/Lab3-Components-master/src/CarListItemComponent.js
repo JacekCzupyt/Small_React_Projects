@@ -18,14 +18,21 @@ class CarListItemComponent extends React.Component{
         this.setState({isBeingEdited: val});
     }
 
+
     DefaultView(){
         return(
             <td width="20%">
                 <tr>
                     {this.state.pricePerDay}
                 </tr>
+                
                 <tr>
-                    <button onClick={(e) => this.OnEditPrice(e, true)}>Edit</button>
+                    <td>
+                        <button onClick={(e) => this.OnEditPrice(e, true)}>Edit</button>
+                    </td>
+                    <td>
+                        <button onClick={() => this.props.removeHook(this.props.ind)}>Delete</button>
+                    </td>
                 </tr>
             </td>
         )
