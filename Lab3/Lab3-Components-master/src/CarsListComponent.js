@@ -6,16 +6,16 @@ class CarsListComponent extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            PlaceholderState: "Placeholder"
+            cars: carsData.map((car) => 
+                <CarListItem carName={car.name} seats={car.seats} doors={car.doors} pricePerDay={car.pricePerDay} />)
         }
     }
 
     render(){
-        const cars = carsData.map((car) => 
-        <CarListItem carName={car.name} seats={car.seats} doors={car.doors} pricePerDay={car.pricePerDay} />)
+
         return(
             <div>
-                {cars}
+                {this.state.cars}
             </div>
         )
     }
