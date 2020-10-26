@@ -1,4 +1,6 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import {Container, Row, Col, Button} from 'reactstrap';
 
 class CarListItemComponent extends React.Component{
     constructor(props){
@@ -16,66 +18,81 @@ class CarListItemComponent extends React.Component{
 
     OnEditPrice(e, val){
         this.setState({isBeingEdited: val});
+        if(val===false)
+        {
+            this.props.editHook(this.state.pricePerDay, this.props.ind);
+        }
     }
 
 
     DefaultView(){
         return(
-            <td width="20%">
-                <tr>
-                    {this.state.pricePerDay}
-                </tr>
+            <Col>
+                <Row style={{fontSize: 8}}>
+                    Price per day:
+                </Row>
+                <Row style={{marginTop: "-6px"}}>
+                    {this.state.pricePerDay} PLN
+                </Row>
                 
-                <tr>
-                    <td>
-                        <button onClick={(e) => this.OnEditPrice(e, true)}>Edit</button>
-                    </td>
-                    <td>
-                        <button onClick={() => this.props.removeHook(this.props.ind)}>Delete</button>
-                    </td>
-                </tr>
-            </td>
+                <Row>
+                   <Button style={{height: "20px", fontSize: 8, paddingTop:"0px", paddingBottom:"0px"}} color="primary"
+                        onClick={(e) => this.OnEditPrice(e, true)}>Edit</Button>
+                   <Button style={{height: "20px", fontSize: 8, paddingTop:"0px", paddingBottom:"0px"}} color="danger"
+                        onClick={() => this.props.removeHook(this.props.ind)}>Delete</Button>
+                </Row>
+            </Col>
+        )
+    }
+
+
+    EditedView(){
+        return(
+            <Col>
+                <Row>
+                    <input type="number" value={this.state.pricePerDay} onChange={this.HandleChange}  />
+                </Row>
+                <Row>
+                    <Button style={{height: "20px", fontSize: 8, paddingTop:"0px", paddingBottom:"0px"}} color="primary"
+                        onClick={(e) => this.OnEditPrice(e, false)}>Save</Button>
+                    <Button style={{height: "20px", fontSize: 8, paddingTop:"0px", paddingBottom:"0px"}} color="danger"
+                        onClick={() => this.props.removeHook(this.props.ind)}>Delete</Button>
+                </Row>
+               
+            </Col>
         )
     }
 
     HandleChange(e){
         this.setState({pricePerDay: e.target.value });
-    }
 
-    EditedView(){
-        return(
-            <td width="20%">
-                <tr>
-                    <input type="number" value={this.state.pricePerDay} onChange={this.HandleChange}  />
-                </tr>
-                <tr>
-                    <button onClick={(e) => this.OnEditPrice(e, false)}>Save</button>
-                </tr>
-            </td>
-        )
     }
     
+    //!('' + this.props.carName).toLocaleLowerCase().includes(this.props.searchTerm.toLocaleLowerCase())
 
     render(){
         return(
-            <div>
-                <table style={{border:"1px solid black"}} width="100%">
-                    <td width="30%">
-                        {this.props.carName}
-                    </td>
-                    <td width="50%">
-                        {this.props.seats}
-                        <br/>
-                        {this.props.doors}
-                    </td>
-                    {
-                        this.state.isBeingEdited ?
-                            this.EditedView()
-                            :
-                            this.DefaultView()
-                    }
-
-                </table>
+            <div style={{margin:"10px"}}>
+                <Container style={{border:"1px solid black", width: "100%", maxWidth: "100%", background:"#AED6F1"}}>
+                    <Row width="100%">
+                        <Col>
+                            {this.props.carName}
+                        </Col>
+                        <Col>
+                            {this.props.seats} seats
+                            <br/>
+                            {this.props.doors} doors
+                        </Col>
+                        <Col>
+                        {
+                            this.state.isBeingEdited ?
+                                this.EditedView()
+                                :
+                                this.DefaultView()
+                        }
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         )
     }
