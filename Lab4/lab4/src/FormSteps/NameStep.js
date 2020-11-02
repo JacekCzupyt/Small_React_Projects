@@ -15,9 +15,9 @@ const constraints = {
 
 function NameStep(props){
 
-    const [FirstName, SetFirstName] = useState("");
-    const [LastName, SetLastName] = useState("");
-    const [EmailAddress, SetEmailAddress] = useState("");
+    const [FirstName, SetFirstName] = useState("temp");
+    const [LastName, SetLastName] = useState("temp");
+    const [EmailAddress, SetEmailAddress] = useState("temp@temp.temp");
     const [ErrorText, SetErrorText] = useState("");
 
     function InputValueChanged(e, setState){
