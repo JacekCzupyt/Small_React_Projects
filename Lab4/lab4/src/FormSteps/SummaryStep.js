@@ -9,7 +9,7 @@ function SummaryStep(props){
             <br/>
             Email: {props.data.Name.EmailAddress}
             <br/>
-            <button>Edit Name (to be implemented)</button>
+            <button onClick={() => props.MoveCallback(0)}>Edit Name</button>
             <br/><br/>
             Delivery Address:
             <br/>
@@ -27,7 +27,7 @@ function SummaryStep(props){
             <br/>
             City: {props.data.Address.InvoiceAddress.city}
             <br/>
-            <button>Edut Address (to be implemented)</button>
+            <button onClick={() => props.MoveCallback(1)}>Edit Address</button>
         </div>
     )
 }

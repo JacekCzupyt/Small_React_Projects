@@ -15,16 +15,16 @@ const constraints = {
 
 function NameStep(props){
 
-    const [FirstName, SetFirstName] = useState("temp");
-    const [LastName, SetLastName] = useState("temp");
-    const [EmailAddress, SetEmailAddress] = useState("temp@temp.temp");
+    const [FirstName, SetFirstName] = useState(props.data ? props.data.FirstName : "");
+    const [LastName, SetLastName] = useState(props.data ? props.data.LastName : "");
+    const [EmailAddress, SetEmailAddress] = useState(props.data ? props.data.EmailAddress : "");
     const [ErrorText, SetErrorText] = useState("");
 
     function InputValueChanged(e, setState){
         setState(e.target.value);
     }
 
-    function NextButtonPressed(){
+    function NextButtonPressed(ind=-1){
         //validate inputs
         if(FirstName===""){
             SetErrorText("First name must be provided");
@@ -44,7 +44,7 @@ function NameStep(props){
         //proceed to next form
         SetErrorText("");
         //props.MoveNextHook({First_Name: {FirstName}, Last_Name: {LastName}, Email_Address: {EmailAddress}});
-        props.MoveNextHook({FirstName, LastName, EmailAddress}  , "Name");
+        props.MoveNextHook({FirstName, LastName, EmailAddress}  , "Name", ind);
     }
 
     return(
@@ -56,6 +56,8 @@ function NameStep(props){
             <input type="text" value={EmailAddress} placeholder="Email" onChange={(e) => InputValueChanged(e, SetEmailAddress)}></input>
             <br/>
             <button onClick={() => NextButtonPressed()}>Next</button>
+            {props.ReachedSummary ? <button onClick={() => NextButtonPressed(2)}>Go to summary</button> : null}
+            <br/>
             <label style={{color: "red"}}>{ErrorText}</label>
         </div>
     )

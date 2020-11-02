@@ -30,8 +30,16 @@ function AddressInput(props){
 
 
 function AddressStep(props){
-    const [DeliveryAddress, SetDeliveryAddress] = useState({street:"", zipCode:"", city:""});
-    const [InvoiceAddress, SetInvoiceAddress] = useState({street:"", zipCode:"", city:""});
+    const [DeliveryAddress, SetDeliveryAddress] = useState({
+        street: props.data ? props.data.DeliveryAddress.street : "", 
+        zipCode:props.data ? props.data.DeliveryAddress.zipCode : "", 
+        city:props.data ? props.data.DeliveryAddress.city : ""
+    });
+    const [InvoiceAddress, SetInvoiceAddress] = useState({
+        street: props.data ? props.data.InvoiceAddress.street : "", 
+        zipCode:props.data ? props.data.InvoiceAddress.zipCode : "", 
+        city:props.data ? props.data.InvoiceAddress.city : ""
+    });
 
     const [DeliveryAddressErrors,SetDeliveryAddressErrors] = useState({});
     const [InvoiceAddressErrors, SetInvoiceAddressErrors] = useState({});
@@ -60,12 +68,12 @@ function AddressStep(props){
         return err;
     }
 
-    function NextButtonPressed(){
+    function NextButtonPressed(ind=-1){
         let err1 = ValidateAddress(DeliveryAddress);
         let err2 = ValidateAddress(InvoiceAddress) ;
 
         if(Object.entries(err1).length === 0 && Object.entries(err2).length === 0){
-            props.MoveNextHook({DeliveryAddress, InvoiceAddress}, "Address");
+            props.MoveNextHook({DeliveryAddress, InvoiceAddress}, "Address", ind);
         }
         else{
             SetDeliveryAddressErrors(err1);
@@ -85,6 +93,7 @@ function AddressStep(props){
             <AddressInput data = {InvoiceAddress} StateCallBack={SetInvoiceAddress} Errors={InvoiceAddressErrors} Title="Invoice Address" enabled={!CheckBoxMarked}/>
             <input type="checkbox" checked={CheckBoxMarked} onChange={(e) => {SetCheckBox(e.target.checked); SetInvoiceAddress(DeliveryAddress);}}/> The same as delivery address
             <br/><br/>
+            <button onClick={() => props.MoveWithoutSaving(0)}>Back</button>
             <button onClick={() => NextButtonPressed()}>Next</button>
         </div>
     )
