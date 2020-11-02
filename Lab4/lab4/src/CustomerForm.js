@@ -5,7 +5,8 @@ import SummaryStep from './FormSteps/SummaryStep';
 
 function CustomerForm(){
 
-    const [ind, setInd] = useState(0);
+    //temporarly changed for developement, change to 0 for final version
+    const [ind, setInd] = useState(1);
     
 
     function MoveToNextStep() {
