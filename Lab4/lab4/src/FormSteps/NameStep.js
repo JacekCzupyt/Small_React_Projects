@@ -1,10 +1,23 @@
 import React, {useState} from 'react'
+import {validate} from 'validate.js'
+
+const constraints = {
+    emailAddress: {
+      presence: {
+        allowEmpty: false,
+        message: "^Email must be provided"
+      },
+      email: {
+        message: "^Email address is invalid"
+      }
+    },
+  };
 
 function NameStep(props){
 
     const [FirstName, SetFirstName] = useState("");
     const [LastName, SetLastName] = useState("");
-    const [Email, SetEmail] = useState("");
+    const [EmailAddress, SetEmailAddress] = useState("");
     const [ErrorText, SetErrorText] = useState("");
 
     function InputValueChanged(e, setState){
@@ -13,19 +26,21 @@ function NameStep(props){
 
     function NextButtonPressed(){
         //validate inputs
-        if(FirstName==""){
+        if(FirstName===""){
             SetErrorText("First name must be provided");
             return;
         }
-        if(LastName==""){
+        if(LastName===""){
             SetErrorText("Last name must be provided");
             return;
         }
-        if(Email==""){
-            SetErrorText("Email must be provided");
-            return;
+        const validationResult = validate({emailAddress: EmailAddress} , constraints);
+        if(validationResult != undefined){
+            console.log(validationResult);
+            SetErrorText(validationResult.emailAddress[0]);
+            return
         }
-        
+        SetErrorText("");
         props.MoveNextHook();
     }
 
@@ -35,7 +50,7 @@ function NameStep(props){
             <br/>
             <input type="text" value={LastName} placeholder="Last Name" onChange={(e) => InputValueChanged(e, SetLastName)}></input>
             <br/>
-            <input type="text" value={Email} placeholder="Email" onChange={(e) => InputValueChanged(e, SetEmail)}></input>
+            <input type="text" value={EmailAddress} placeholder="Email" onChange={(e) => InputValueChanged(e, SetEmailAddress)}></input>
             <br/>
             <button onClick={() => NextButtonPressed()}>Next</button>
             <label style={{color: "red"}}>{ErrorText}</label>
