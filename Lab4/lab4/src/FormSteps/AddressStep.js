@@ -52,8 +52,8 @@ function AddressStep(props){
         else if(!ZipCodeRegExp.test(val.zipCode)){
             err.zipCode = "Invalid zip code";
         }
-        console.log(err);
-        console.log(Object.entries(err).length === 0);
+        //console.log(err);
+        //console.log(Object.entries(err).length === 0);
 
         return err;
     }
@@ -63,7 +63,7 @@ function AddressStep(props){
         let err2 = ValidateAddress(InvoiceAddress);
 
         if(Object.entries(err1).length === 0 && Object.entries(err2).length === 0){
-            props.MoveNextHook();
+            props.MoveNextHook({DeliveryAddress, InvoiceAddress}, "Address");
         }
         else{
             SetDeliveryAddressErrors(err1);

@@ -40,8 +40,11 @@ function NameStep(props){
             SetErrorText(validationResult.emailAddress[0]);
             return
         }
+
+        //proceed to next form
         SetErrorText("");
-        props.MoveNextHook();
+        //props.MoveNextHook({First_Name: {FirstName}, Last_Name: {LastName}, Email_Address: {EmailAddress}});
+        props.MoveNextHook({FirstName, LastName, EmailAddress}  , "Name");
     }
 
     return(
