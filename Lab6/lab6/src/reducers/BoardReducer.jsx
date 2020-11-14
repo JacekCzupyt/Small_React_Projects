@@ -1,12 +1,10 @@
 
-function LengthReducer(state, action){
+function IndexReducer(state, action){
     switch(action.type){
         case "IncrementIndex":
-            let ind = state.Index + 1;
-            if(ind > state.Length){ind = 0;}
-            return {Length: state.Length, Index: ind};
+            return (state.ind + 1)%state.len;
         default:
-            return state;
+            return state.ind;
     }
 }
 
@@ -32,7 +30,8 @@ function BoardReducer(state, action){
 function FullReducer(state = {}, action){
     return {
         BoardSize: state.BoardSize,
-        SnakeLength: LengthReducer(state.SnakeLength, action),
+        SnakeLength: state.SnakeLength,
+        Index: IndexReducer({len: state.SnakeLength, ind: state.Index}, action),
         SnakeState: SnakeReducer(state.SnakeState, action),
         BoardState: BoardReducer(state.BoardState, action)
     };

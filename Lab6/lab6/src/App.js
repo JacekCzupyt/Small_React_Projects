@@ -19,9 +19,10 @@ const BoardState = Array(BoardSize).fill(0).map(
 
 const InitialStoreState = {
   BoardSize: BoardSize,
-  SnakeLength: {Length: SnakeLength, Index: 0},
+  SnakeLength: SnakeLength,
   SnakeState: SnakeState,
-  BoardState: BoardState
+  BoardState: BoardState,
+  Index: SnakeLength-1
 };
 
 const store = createStore(reducer, InitialStoreState, devToolsEnhancer());
