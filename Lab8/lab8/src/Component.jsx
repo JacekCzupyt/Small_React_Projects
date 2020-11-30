@@ -18,8 +18,8 @@ function Component(porps){
         <div>
             {isLoaded ? 
             <div>
-                <button onClick={() => history.push('/add')}>Add Employee</button> 
                 {employees.map((employee) => (<div><p>{employee.id} : {employee.name}</p></div>))} 
+                <button onClick={() => history.push('/add')}>Add Employee</button> 
             </div>
             :
             "Loading..."}

@@ -9,14 +9,17 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route exact path="/">
-            <Component/>
-          </Route>
-          <Route path="/add">
-            <AddForm/>
-          </Route>
-        </Switch>
+        <div>
+          <Component/>
+          <Switch>
+            <Route exact path="/">
+            </Route>
+            <Route path="/add">
+              <AddForm/>
+            </Route>
+          </Switch>
+        </div>
+        
       </Router>
     </div>
     
